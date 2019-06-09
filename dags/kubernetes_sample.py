@@ -29,7 +29,8 @@ passing = KubernetesPodOperator(namespace='airflow',
                                 name="passing-test",
                                 task_id="passing-task",
                                 get_logs=True,
-                                dag=dag
+                                dag=dag,
+                                in_cluster=True
                                 )
 
 failing = KubernetesPodOperator(namespace='airflow',
@@ -40,7 +41,8 @@ failing = KubernetesPodOperator(namespace='airflow',
                                 name="fail",
                                 task_id="failing-task",
                                 get_logs=True,
-                                dag=dag
+                                dag=dag,
+                                in_cluster=True
                                 )
 
 passing.set_upstream(start)
