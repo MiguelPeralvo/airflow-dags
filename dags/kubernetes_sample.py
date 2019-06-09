@@ -1,5 +1,6 @@
-from airflow import DAG
 from datetime import datetime, timedelta
+
+from airflow import DAG
 from airflow.contrib.operators.kubernetes_pod_operator import KubernetesPodOperator
 from airflow.operators.dummy_operator import DummyOperator
 
@@ -21,8 +22,8 @@ start = DummyOperator(task_id='run_this_first', dag=dag)
 
 passing = KubernetesPodOperator(
   namespace='airflow',
-  image="Python:3.6",
-  cmds=["Python", "-c"],
+  image="python:3.6",
+  cmds=["python", "-c"],
   arguments=["print('hello world')"],
   labels={"foo": "bar"},
   name="passing-test",
@@ -35,7 +36,7 @@ passing = KubernetesPodOperator(
 failing = KubernetesPodOperator(
   namespace='airflow',
   image="ubuntu:1604",
-  cmds=["Python", "-c"],
+  cmds=["python", "-c"],
   arguments=["print('hello world')"],
   labels={"foo": "bar"},
   name="fail",
